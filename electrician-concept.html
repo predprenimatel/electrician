@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Электромонтаж Киев — услуги электрика</title>
+<style>
+  :root{
+    --bg:#15171b;
+    --bg-card:#1c1f24;
+    --bg-card-hover:#22262c;
+    --line:#2c3037;
+    --text:#eceae4;
+    --text-dim:#93979e;
+    --copper:#c8793d;
+    --copper-bright:#e8934f;
+    --hazard:#e8b23d;
+    --hazard-dark:#1a1a1a;
+    --danger:#c94f3d;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',-apple-system,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'JetBrains Mono','Courier New',monospace;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--copper-bright);
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:16px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:18px;height:2px;
+    background:var(--copper-bright);
+  }
+
+  /* ===== HEADER ===== */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(21,23,27,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    height:72px;
+  }
+  .logo{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;font-size:17px;
+    letter-spacing:.02em;
+  }
+  .logo span{color:var(--copper-bright);}
+  .header-contacts{display:flex;align-items:center;gap:14px;}
+  .phone-link{
+    font-family:'JetBrains Mono',monospace;
+    font-size:15px;font-weight:600;
+    color:var(--text);
+  }
+  .phone-link:hover{color:var(--copper-bright);}
+  .btn-tg{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--copper);
+    color:#15171b;
+    font-weight:700;font-size:14px;
+    padding:10px 18px;
+    border-radius:var(--radius);
+    transition:background .15s ease, transform .15s ease;
+    border:none;cursor:pointer;
+  }
+  .btn-tg:hover{background:var(--copper-bright);transform:translateY(-1px);}
+  .btn-tg svg{width:16px;height:16px;flex-shrink:0;}
+  @media(max-width:640px){
+    .phone-link{display:none;}
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    padding:100px 0 90px;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hazard-strip{
+    position:absolute;
+    top:0;right:-10%;
+    width:60%;height:6px;
+    background:repeating-linear-gradient(135deg,var(--hazard) 0 18px,var(--hazard-dark) 18px 36px);
+    opacity:.85;
+  }
+  .hazard-strip.bottom{top:auto;bottom:0;left:-10%;right:auto;}
+  .hero-grid{
+    display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;
+  }
+  .hero h1{
+    font-size:44px;line-height:1.12;font-weight:800;letter-spacing:-.01em;
+    margin-bottom:22px;
+  }
+  .hero h1 em{
+    font-style:normal;color:var(--copper-bright);
+  }
+  .hero p.lead{
+    font-size:17px;color:var(--text-dim);max-width:480px;margin-bottom:32px;
+  }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px;}
+  .btn-lg{
+    padding:15px 26px;font-size:15px;font-weight:700;
+    border-radius:var(--radius);
+  }
+  .btn-primary{background:var(--copper);color:#15171b;}
+  .btn-primary:hover{background:var(--copper-bright);}
+  .btn-outline{
+    border:1px solid var(--line);color:var(--text);
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-outline:hover{border-color:var(--copper);color:var(--copper-bright);}
+  .hero-facts{
+    display:flex;gap:32px;flex-wrap:wrap;
+    padding-top:24px;border-top:1px solid var(--line);
+  }
+  .fact-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:28px;font-weight:700;color:var(--copper-bright);
+  }
+  .fact-label{font-size:13px;color:var(--text-dim);}
+
+  /* hero visual: breaker panel teaser */
+  .panel-visual{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px;
+  }
+  .panel-visual-head{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'JetBrains Mono',monospace;font-size:12px;
+    color:var(--text-dim);margin-bottom:16px;
+    text-transform:uppercase;letter-spacing:.1em;
+  }
+  .panel-visual-head .dot{width:8px;height:8px;border-radius:50%;background:#4ca866;display:inline-block;margin-right:6px;box-shadow:0 0 8px #4ca866;}
+  .breaker-row{display:flex;flex-direction:column;gap:8px;}
+  .breaker{
+    display:flex;align-items:center;justify-content:space-between;
+    background:var(--bg);border:1px solid var(--line);
+    padding:11px 14px;border-radius:1px;
+  }
+  .breaker-name{font-size:13px;color:var(--text);}
+  .switch{
+    width:34px;height:16px;background:#0e0f12;border-radius:2px;
+    position:relative;border:1px solid var(--line);
+  }
+  .switch::after{
+    content:"";position:absolute;top:1px;bottom:1px;width:14px;
+    background:var(--copper-bright);border-radius:1px;
+    right:1px;
+  }
+  .switch.off::after{background:#4a4e55;left:1px;right:auto;}
+
+  @media(max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:32px;}
+  }
+
+  /* ===== SECTION SHARED ===== */
+  section{padding:80px 0;border-bottom:1px solid var(--line);}
+  .section-head{max-width:640px;margin-bottom:48px;}
+  .section-head h2{font-size:30px;font-weight:800;letter-spacing:-.01em;}
+  .section-head p{color:var(--text-dim);margin-top:12px;font-size:15px;}
+
+  /* ===== SERVICES: BREAKER PANEL ===== */
+  .services-panel{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:8px;
+  }
+  .services-panel-strip{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:14px 18px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;
+    color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;
+    border-bottom:1px dashed var(--line);
+    margin-bottom:8px;
+  }
+  .services-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+  }
+  .service-item{
+    background:var(--bg);
+    border:1px solid var(--line);
+    padding:24px 20px;
+    display:flex;flex-direction:column;gap:14px;
+    transition:border-color .15s ease, transform .15s ease;
+    cursor:default;
+  }
+  .service-item:hover{border-color:var(--copper);transform:translateY(-2px);}
+  .service-top{display:flex;justify-content:space-between;align-items:flex-start;}
+  .service-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim);}
+  .service-item h3{font-size:16px;font-weight:700;}
+  .service-item p{font-size:13.5px;color:var(--text-dim);}
+  @media(max-width:860px){.services-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.services-grid{grid-template-columns:1fr;}}
+
+  /* ===== PRICING TABS ===== */
+  .tabs{display:flex;gap:2px;margin-bottom:0;border-bottom:1px solid var(--line);}
+  .tab{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;font-weight:600;
+    padding:14px 20px;color:var(--text-dim);
+    cursor:pointer;border-bottom:2px solid transparent;
+    background:none;border-top:none;border-left:none;border-right:none;
+  }
+  .tab.active{color:var(--copper-bright);border-bottom-color:var(--copper-bright);}
+  .tab-panel{display:none;padding-top:28px;}
+  .tab-panel.active{display:block;}
+  .price-table{width:100%;border-collapse:collapse;}
+  .price-table tr{border-bottom:1px solid var(--line);}
+  .price-table tr:last-child{border-bottom:none;}
+  .price-table td{padding:14px 4px;font-size:14.5px;}
+  .price-table td:last-child{
+    text-align:right;font-family:'JetBrains Mono',monospace;
+    font-weight:700;color:var(--copper-bright);white-space:nowrap;
+    padding-left:20px;
+  }
+  .price-note{
+    margin-top:20px;font-size:13px;color:var(--text-dim);
+    padding:14px 16px;background:var(--bg-card);border-left:2px solid var(--copper);
+  }
+
+  /* ===== WORKS / PHOTO PLACEHOLDERS ===== */
+  .works-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+  }
+  .work-item{
+    aspect-ratio:4/3;
+    background:
+      repeating-linear-gradient(45deg, #1e2126 0 10px, #23262c 10px 20px);
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;
+  }
+  .work-item img{width:100%;height:100%;object-fit:cover;display:block;}
+  .work-item span{
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;
+    background:rgba(21,23,27,.75);padding:6px 10px;
+  }
+  @media(max-width:860px){.works-grid{grid-template-columns:repeat(2,1fr);}}
+
+  /* ===== ABOUT ===== */
+  .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start;}
+  .about-photo{
+    aspect-ratio:3/4;
+    background:repeating-linear-gradient(45deg,#1e2126 0 10px,#23262c 10px 20px);
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .about-photo span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim);}
+  .about-list{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:14px;}
+  .about-list li{
+    display:flex;gap:12px;font-size:14.5px;color:var(--text-dim);
+    padding-bottom:14px;border-bottom:1px solid var(--line);
+  }
+  .about-list li:last-child{border:none;}
+  .about-list b{color:var(--text);font-weight:600;min-width:120px;flex-shrink:0;}
+  @media(max-width:860px){.about-grid{grid-template-columns:1fr;}}
+
+  /* ===== CONTACT / CTA ===== */
+  .cta-section{
+    padding:70px 0;
+    background:var(--bg-card);
+    border-bottom:none;
+    text-align:center;
+  }
+  .cta-section h2{font-size:28px;font-weight:800;margin-bottom:12px;}
+  .cta-section p{color:var(--text-dim);margin-bottom:32px;}
+  .cta-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .service-area{
+    margin-top:36px;font-family:'JetBrains Mono',monospace;
+    font-size:12px;color:var(--text-dim);letter-spacing:.05em;
+    text-transform:uppercase;
+  }
+  .service-area b{color:var(--copper-bright);}
+
+  footer{padding:28px 0;text-align:center;font-size:13px;color:var(--text-dim);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <div class="logo">ЕЛЕКТРО<span>МОНТАЖ</span></div>
+    <div class="header-contacts">
+      <a href="tel:+380996984642" class="phone-link mono">+380 99 698 46 42</a>
+      <a href="https://t.me/elektrokyev" class="btn-tg" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 3.5 2.5 11.1c-1.2.5-1.2 1.2-.2 1.5l4.9 1.5 1.9 5.8c.2.6.4.8.8.8.4 0 .6-.2.8-.5l2.2-2.1 4.7 3.5c.8.5 1.4.2 1.6-.8l3-14.1c.3-1.3-.4-1.9-1.3-1.7ZM7.9 13.6l9.6-6c.4-.3.8-.1.5.2l-8.1 7.4-.3 3.1-1.7-4.7Z"/></svg>
+        Telegram
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hazard-strip"></div>
+  <div class="hazard-strip bottom"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Электромонтаж · Киев</div>
+      <h1>Электромонтаж <em>любой сложности</em> — от мелкого ремонта до монтажа электрики под ключ</h1>
+      <p class="lead">7 лет практики, 4-й разряд. Беру объекты в квартирах, домах и на коммерции по всему Киеву — от точечного ремонта до чернового монтажа с нуля.</p>
+      <div class="hero-cta">
+        <a href="https://t.me/elektrokyev" class="btn-lg btn-primary" target="_blank">Написать в Telegram</a>
+        <a href="#pricing" class="btn-lg btn-outline">Смотреть цены</a>
+      </div>
+      <div class="hero-facts">
+        <div><div class="fact-num">7</div><div class="fact-label">лет опыта</div></div>
+        <div><div class="fact-num">4</div><div class="fact-label">разряд допуска</div></div>
+        <div><div class="fact-num">100%</div><div class="fact-label">только Киев</div></div>
+      </div>
+    </div>
+    <div class="panel-visual">
+      <div class="panel-visual-head"><span><span class="dot"></span>Щиток</span><span>3-Ф · 380В</span></div>
+      <div class="breaker-row">
+        <div class="breaker"><span class="breaker-name">Штробление и проводка</span><div class="switch"></div></div>
+        <div class="breaker"><span class="breaker-name">Розетки и выключатели</span><div class="switch"></div></div>
+        <div class="breaker"><span class="breaker-name">Сборка щитка</span><div class="switch"></div></div>
+        <div class="breaker"><span class="breaker-name">Освещение</span><div class="switch"></div></div>
+        <div class="breaker"><span class="breaker-name">Аварийный вызов</span><div class="switch off"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Услуги</div>
+      <h2>Полный цикл электромонтажных работ</h2>
+      <p>От разовой замены розетки до чернового монтажа всей квартиры под чистовую отделку.</p>
+    </div>
+    <div class="services-panel">
+      <div class="services-grid">
+        <div class="service-item">
+          <div class="service-top"><span class="service-num mono">01</span></div>
+          <h3>Штробление и разводка кабеля</h3>
+          <p>Прокладка силовых и слаботочных линий, штробление под скрытую проводку.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-top"><span class="service-num mono">02</span></div>
+          <h3>Установка розеток и выключателей</h3>
+          <p>Монтаж и замена точек — от одиночной розетки до полного блока на комнату.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-top"><span class="service-num mono">03</span></div>
+          <h3>Сборка и подключение щитка</h3>
+          <p>Автоматы, УЗО, дифавтоматы, разводка групп — с маркировкой и схемой.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-top"><span class="service-num mono">04</span></div>
+          <h3>Монтаж освещения</h3>
+          <p>Люстры, точечные светильники, LED-лента, подключение выключателей проходных и с диммером.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-top"><span class="service-num mono">05</span></div>
+          <h3>Электромонтаж под ключ</h3>
+          <p>Полный черновой монтаж квартиры или дома с нуля — по проекту или по месту.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-top"><span class="service-num mono">06</span></div>
+          <h3>Аварийный выезд</h3>
+          <p>Поиск неисправности, устранение короткого замыкания, срабатывания автоматов.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Цены</div>
+      <h2>Стоимость работ</h2>
+      <p>Ориентировочные расценки на работу без учёта материала. Точная сумма — после осмотра объекта или по чертежам.</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="rough">Штробление и кабель</button>
+      <button class="tab" data-tab="points">Розетки, коробки, сверление</button>
+      <button class="tab" data-tab="light">Освещение и техника</button>
+      <button class="tab" data-tab="panel">Щиток и автоматика</button>
+    </div>
+
+    <div class="tab-panel active" id="rough">
+      <table class="price-table">
+        <tr><td>Штробление под кабель (в гипсокартоне)</td><td>90 грн/пог.м</td></tr>
+        <tr><td>Штробление 20×20 мм (в кирпиче)</td><td>120 грн/пог.м</td></tr>
+        <tr><td>Штробление 20×40 мм (в кирпиче)</td><td>140 грн/пог.м</td></tr>
+        <tr><td>Штробление 20×60 мм (в кирпиче)</td><td>160 грн/пог.м</td></tr>
+        <tr><td>Штробление 20×20 мм (в бетоне)</td><td>200 грн/пог.м</td></tr>
+        <tr><td>Штробление 40×20 мм (в бетоне)</td><td>220 грн/пог.м</td></tr>
+        <tr><td>Штробление 60×20 мм (в бетоне)</td><td>250 грн/пог.м</td></tr>
+        <tr><td>Штробление 50×250 мм (в кирпиче)</td><td>350 грн/пог.м</td></tr>
+        <tr><td>Штробление под кабель-канал</td><td>200 грн/пог.м</td></tr>
+        <tr><td>Монтаж кабель-канала</td><td>400 грн/пог.м</td></tr>
+        <tr><td>Прокладка кабеля (открытая)</td><td>45 грн/пог.м</td></tr>
+        <tr><td>Прокладка ретро-провода в стиле "лофт"</td><td>120 грн/пог.м</td></tr>
+        <tr><td>Прокладка кабеля в гофре</td><td>65 грн/пог.м</td></tr>
+        <tr><td>Прокладка кабеля в металлорукаве</td><td>75 грн/пог.м</td></tr>
+        <tr><td>Прокладка силового кабеля</td><td>90 грн/пог.м</td></tr>
+        <tr><td>Прокладка силового кабеля (в гофре/трубе)</td><td>140 грн/пог.м</td></tr>
+        <tr><td>Опрессовка кабельных наконечников</td><td>100 грн/шт</td></tr>
+        <tr><td>Пайка кабеля</td><td>100 грн/стык</td></tr>
+        <tr><td>Заделка штробы</td><td>80 грн/пог.м</td></tr>
+      </table>
+    </div>
+
+    <div class="tab-panel" id="points">
+      <table class="price-table">
+        <tr><td>Отверстие под подрозетник (гипсокартон)</td><td>90 грн/шт</td></tr>
+        <tr><td>Отверстие под подрозетник (кирпич)</td><td>140 грн/шт</td></tr>
+        <tr><td>Отверстие под подрозетник (бетон)</td><td>220 грн/шт</td></tr>
+        <tr><td>Монтаж подрозетника</td><td>60 грн/шт</td></tr>
+        <tr><td>Отверстие под распредкоробку (гипсокартон)</td><td>120 грн/шт</td></tr>
+        <tr><td>Отверстие под распредкоробку (кирпич)</td><td>150 грн/шт</td></tr>
+        <tr><td>Отверстие под распредкоробку (бетон)</td><td>240 грн/шт</td></tr>
+        <tr><td>Монтаж распредкоробки в стену</td><td>80 грн/шт</td></tr>
+        <tr><td>Монтаж распредкоробки на потолок</td><td>70 грн/шт</td></tr>
+        <tr><td>Сборка распредкоробки, распайка проводов</td><td>380 грн/шт</td></tr>
+        <tr><td>Коммутация в подрозетнике</td><td>400 грн/шт</td></tr>
+        <tr><td>Монтаж лючка-ревизии под ТВ/интернет</td><td>400 грн/шт</td></tr>
+        <tr><td>Монтаж кабельной вилки</td><td>70 грн/шт</td></tr>
+        <tr><td>Промышленная розетка на фасаде</td><td>400 грн/шт</td></tr>
+        <tr><td>Установка розетки/выключателя</td><td>140 грн/шт</td></tr>
+        <tr><td>Проходной / перекрёстный выключатель</td><td>300 грн/шт</td></tr>
+        <tr><td>Накладная розетка/выключатель/коробка</td><td>180 грн/шт</td></tr>
+        <tr><td>Розетка для ТВ, разветвитель/усилитель</td><td>250 грн/шт</td></tr>
+        <tr><td>Розетка компьютерная</td><td>250 грн/шт</td></tr>
+        <tr><td>Сверление отверстия (гипсокартон)</td><td>от 90 грн/шт</td></tr>
+        <tr><td>Сверление отверстия (кирпич)</td><td>от 120 грн/шт</td></tr>
+        <tr><td>Сверление отверстия (бетон)</td><td>от 150 грн/шт</td></tr>
+        <tr><td>Сверление под кабель в капитальной стене</td><td>от 400 грн/шт</td></tr>
+        <tr><td>Сверление под точечный светильник (гипсокартон)</td><td>180 грн/шт</td></tr>
+        <tr><td>Сверление под точечный светильник (реечный потолок)</td><td>230 грн/шт</td></tr>
+      </table>
+    </div>
+
+    <div class="tab-panel" id="light">
+      <table class="price-table">
+        <tr><td>Точечный светильник, софит</td><td>250 грн/шт</td></tr>
+        <tr><td>Трансформатор</td><td>250 грн/шт</td></tr>
+        <tr><td>Стабилизатор напряжения</td><td>1 300 грн/шт</td></tr>
+        <tr><td>Закладная гофра под тёплый пол</td><td>40 грн/пог.м</td></tr>
+        <tr><td>Укладка тёплого пола (до 10 м²)</td><td>600 грн/м²</td></tr>
+        <tr><td>Укладка тёплого пола (от 10 м²)</td><td>450 грн/м²</td></tr>
+        <tr><td>Фиксация нагревательного мата клеем</td><td>60 грн/м²</td></tr>
+        <tr><td>Тёплый пол (инфракрасная плёнка)</td><td>500 грн/м²</td></tr>
+        <tr><td>Терморегулятор тёплого пола</td><td>600 грн/шт</td></tr>
+        <tr><td>LED-лента (в профиле)</td><td>350 грн/пог.м</td></tr>
+        <tr><td>Спайка LED-ленты</td><td>140 грн/шт</td></tr>
+        <tr><td>Сборка простой люстры</td><td>800 грн/шт</td></tr>
+        <tr><td>Подвесной светильник / простая люстра</td><td>700 грн/шт</td></tr>
+        <tr><td>Настенный светильник, бра</td><td>350 грн/шт</td></tr>
+        <tr><td>Светодиодный светильник</td><td>350 грн/шт</td></tr>
+        <tr><td>Шинопровод трековой системы</td><td>500 грн/пог.м</td></tr>
+        <tr><td>Трековый светильник</td><td>200 грн/шт</td></tr>
+        <tr><td>Дверной звонок проводной</td><td>500 грн/шт</td></tr>
+        <tr><td>Дверной звонок беспроводной</td><td>400 грн/шт</td></tr>
+        <tr><td>Кнопка дверного звонка</td><td>200 грн/шт</td></tr>
+        <tr><td>Электроплита, варочная поверхность</td><td>1 200 грн/шт</td></tr>
+        <tr><td>Видеодомофон</td><td>1 500 грн/шт</td></tr>
+        <tr><td>Датчик движения / освещённости</td><td>500 грн/шт</td></tr>
+      </table>
+    </div>
+
+    <div class="tab-panel" id="panel">
+      <table class="price-table">
+        <tr><td>Заземляющий контур</td><td>8 000 грн/контур</td></tr>
+        <tr><td>Закладная гофра под резервное питание</td><td>40 грн/пог.м</td></tr>
+        <tr><td>Прозвонка цепи</td><td>100 грн/точка</td></tr>
+        <tr><td>Временное освещение/розетки (на время ремонта)</td><td>100 грн/шт</td></tr>
+        <tr><td>Вырезка ниши под щиток (12–36 модулей)</td><td>900 грн/шт</td></tr>
+        <tr><td>Вырезка ниши под щиток (48–60 модулей)</td><td>1 600 грн/шт</td></tr>
+        <tr><td>Монтаж щитка в нишу</td><td>900 грн/шт</td></tr>
+        <tr><td>Монтаж накладного щитка (12–36 модулей)</td><td>800 грн/шт</td></tr>
+        <tr><td>Монтаж накладного щитка (48–60 модулей)</td><td>1 250 грн/шт</td></tr>
+        <tr><td>Монтаж накладного щитка (72–90 модулей)</td><td>1 700 грн/шт</td></tr>
+        <tr><td>Монтаж накладного щитка (120–180 модулей)</td><td>2 100 грн/шт</td></tr>
+        <tr><td>Контактор 220В</td><td>440 грн/шт</td></tr>
+        <tr><td>Контактор 380В</td><td>600 грн/шт</td></tr>
+        <tr><td>Нулевые шины</td><td>200 грн/шт</td></tr>
+        <tr><td>Распределительный блок на DIN-рейку</td><td>360 грн/шт</td></tr>
+        <tr><td>Автомат однополюсный</td><td>220 грн/шт</td></tr>
+        <tr><td>Автомат двухполюсный</td><td>440 грн/шт</td></tr>
+        <tr><td>Автомат трёхполюсный</td><td>660 грн/шт</td></tr>
+        <tr><td>Автомат четырёхполюсный</td><td>880 грн/шт</td></tr>
+        <tr><td>Автомат перекидной двухполюсный</td><td>500 грн/шт</td></tr>
+        <tr><td>Автомат перекидной четырёхполюсный</td><td>1 000 грн/шт</td></tr>
+        <tr><td>Реле перекидное четырёхполюсное</td><td>900 грн/шт</td></tr>
+        <tr><td>УЗО двухполюсное</td><td>500 грн/шт</td></tr>
+        <tr><td>УЗО четырёхполюсное</td><td>900 грн/шт</td></tr>
+        <tr><td>АВР</td><td>1 200 грн/шт</td></tr>
+        <tr><td>Рубильник реверсивный</td><td>1 200 грн/шт</td></tr>
+        <tr><td>Дифавтомат</td><td>400 грн/шт</td></tr>
+        <tr><td>Реле напряжения (однофазное)</td><td>520 грн/шт</td></tr>
+        <tr><td>Реле напряжения (трёхфазное)</td><td>1 500 грн/шт</td></tr>
+        <tr><td>Кросс-модуль</td><td>600 грн/шт</td></tr>
+      </table>
+    </div>
+
+    <div class="price-note" style="margin-top:32px;">Цены — за работу, без стоимости материала. Финальная сумма по объекту — после осмотра или по чертежам.</div>
+  </div>
+</section>
+
+<section id="works">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Примеры работ</div>
+      <h2>Объекты, которые уже сделаны</h2>
+    </div>
+    <div class="works-grid">
+      <div class="work-item"><img src="photos/IMG_0301.jpeg" alt="Электромонтаж — объект"></div>
+      <div class="work-item"><img src="photos/IMG20260118192806_Original.jpeg" alt="Освещение — объект"></div>
+      <div class="work-item"><img src="photos/IMG20260118192729_Original.jpeg" alt="Освещение — объект"></div>
+      <div class="work-item"><img src="photos/IMG20260118192706_Original.jpeg" alt="Освещение — объект"></div>
+      <div class="work-item"><img src="photos/IMG_0469_Original.jpeg" alt="Электромонтаж — объект"></div>
+      <div class="work-item"><img src="photos/IMG_0533_Original.jpeg" alt="Освещение — объект"></div>
+      <div class="work-item"><img src="photos/IMG_0617_Original.jpeg" alt="Освещение — объект"></div>
+      <div class="work-item"><img src="photos/IMG_1025.jpeg" alt="Щиток — объект"></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div style="max-width:640px;">
+      <div class="eyebrow">О мастере</div>
+      <h2 style="font-size:28px;font-weight:800;">7 лет в электромонтаже, 4-й разряд</h2>
+      <p style="color:var(--text-dim);margin-top:14px;font-size:15px;">Работаю без посредников — напрямую с заказчиком, от осмотра объекта до сдачи работы. Беру объекты любой сложности: от разовой заявки на розетку до полного электромонтажа квартиры с нуля.</p>
+      <ul class="about-list">
+        <li><b>Опыт</b><span>7 лет в электромонтаже, 4-й разряд допуска</span></li>
+        <li><b>Специализация</b><span>Полный цикл: от штробления до сборки щитка</span></li>
+        <li><b>География</b><span>Только Киев — без выездов в область</span></li>
+        <li><b>Формат работы</b><span>Частный мастер, без посредников и наценок агентства</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" style="border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <h2>Нужен электрик в Киеве?</h2>
+    <p>Опишите задачу в Telegram — отвечу и оценю стоимость по фото или на месте.</p>
+    <div class="cta-buttons">
+      <a href="https://t.me/elektrokyev" class="btn-lg btn-primary" target="_blank">Написать в Telegram</a>
+      <a href="tel:+380996984642" class="btn-lg btn-outline">+380 99 698 46 42</a>
+    </div>
+    <div class="service-area">Зона обслуживания: <b>только г. Киев</b></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Электромонтаж Киев · Частный мастер</div>
+</footer>
+
+<script>
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
